@@ -56,24 +56,29 @@
             var temp = img.data;
             var x = that.__config.trans_v;
             for(var i = 0; i < h; i++){
+                var len = that.__imageData.length;
                 var line_data = [];
-                if ( i%5 > 2){
-                    continue;
-                }
+                //if ( i%5 > 2){
+                //    continue;
+                //}
                 for(var j = 0; j < w; j++) {
                     var index = i*4*w + j*4;
-                    if ( j%5 > 2){
-                        continue;
-                    }
+                    //if ( j%5 > 2){
+                    //    continue;
+                    //}
                     var llen = line_data.length;
                     line_data[llen] = {
-                        r: temp[index],
-                        g: temp[index+1],
-                        b: temp[index+2],
-                        a: (temp[index+3]/255)
+                         'x':llen,
+                         'y':len,
+                         'c':{
+                             r: temp[index],
+                             g: temp[index+1],
+                             b: temp[index+2],
+                             a: (temp[index+3]/255)
+                         },
+                         'info':{}
                     };
                 }
-                var len = that.__imageData.length;
                 that.__imageData[len] = line_data;
             }
             console.log(that.__imageData);
@@ -137,7 +142,7 @@
                     //}
                     that.__cxt.fillRect(i*4, j*4, 3, 3);
                     //that.__cxt.arc(i*4, j*4, 2, 0, Math.PI * 2, true);
-                    that.__cxt.fillStyle = "rgba("+item.r+","+item.g+","+item.b+","+1+")";
+                    that.__cxt.fillStyle = "rgba("+item.c.r+","+item.c.g+","+item.c.b+","+item.c.a+")";
                     that.__cxt.fill();
                 }
             }
