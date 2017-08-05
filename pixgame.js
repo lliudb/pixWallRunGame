@@ -51,8 +51,8 @@
             return that;
         }
 
-        var anplizeImageData = function(data, w, h){
-            var temp = data.data;
+        var anplizeImageData = function(img, w, h){
+            var temp = img.data;
             for(var i = 0; i < h; i++){
                 var line_data = [];
                 for(var j = 0; j < w; j++) {
