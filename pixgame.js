@@ -10,6 +10,7 @@
         //pix数据
         that.__Data = data;
         that.__image;
+        that.__imageData = [];
 
         that.__config   = {
             'image' : config.image_url,
@@ -50,14 +51,32 @@
             return that;
         }
 
+        var anplizeImageData = function(data, w, h){
+            var temp = data.data;
+            for(var i = 0; i < h; i++){
+                var line_data = [];
+                for(var j = 0; j < w; j++) {
+                    var index = (i-1)*4*w + j*4;
+                    line_data.push({
+                        r: temp[index],
+                        g: temp[index+1],
+                        b: temp[index+2],
+                        a: temp[index+3]
+                    });
+                }
+                that.__imageData.push(line_data);
+            }
+        }
 
         var getImageSrc = function(){
             that.__image = new Image();
             that.__image.src = that.__config.image;
             that.__image.onload = function(){
-                console.log(that.__cxt.drawImage(that.__image, 0, 0));
+                that.__cxt.drawImage(that.__image, 0, 0)
+                console.log(that.__image.width, that.__image.height);
                 var data = that.__cxt.getImageData(0, 0, that.__image.width, that.__image.height);
-
+                console.log(data.data, data.data.length, data.data[0]);
+                anplizeImageData(data, that.__image.width, that.__image.height);
             };
         }
 
