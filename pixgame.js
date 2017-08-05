@@ -57,12 +57,12 @@
             var x = that.__config.trans_v;
             for(var i = 0; i < h; i++){
                 var line_data = [];
-                if ( i%2 == 1){
+                if ( i%5 > 2){
                     continue;
                 }
                 for(var j = 0; j < w; j++) {
                     var index = i*4*w + j*4;
-                    if ( j%2 == 1 ){
+                    if ( j%5 > 2){
                         continue;
                     }
                     var llen = line_data.length;
@@ -123,22 +123,20 @@
         that.render = function(){
             //清空当前画布内容
             clearCanvas();
-            that.i = (that.i+1)%60;
+            //that.i = (that.i+1)%(that.__image.width/4);
             //根据当前数据渲染绘制界面
             for(var j = 0; j < that.__imageData.length; j++){
-                if (j%that.i == that.i-1){
-                    continue;
-                }
+                //if (j%that.i == that.i-1){
+                //    continue;
+                //}
                 var items = that.__imageData[j];
                 for(var i = 0; i < items.length; i++){
                     var item = items[i];
-                    if( i%that.i == that.i-1){
-                        continue;
-                    }
-                    that.__cxt.beginPath(i*4, j*4);
+                    //if( i%that.i == that.i-1){
+                    //    continue;
+                    //}
                     that.__cxt.fillRect(i*4, j*4, 3, 3);
                     //that.__cxt.arc(i*4, j*4, 2, 0, Math.PI * 2, true);
-                    that.__cxt.closePath();
                     that.__cxt.fillStyle = "rgba("+item.r+","+item.g+","+item.b+","+1+")";
                     that.__cxt.fill();
                 }
