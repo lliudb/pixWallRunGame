@@ -56,7 +56,8 @@
             that.__image.src = that.__config.image;
             that.__image.onload = function(){
                 console.log(that.__cxt.drawImage(that.__image, 0, 0));
-                console.log(that.__cxt.getImageData(0, 0, that.__image.width, that.__image.height));
+                var data = that.__cxt.getImageData(0, 0, that.__image.width, that.__image.height);
+
             };
         }
 
