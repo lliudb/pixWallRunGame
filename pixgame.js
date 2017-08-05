@@ -54,23 +54,24 @@
 
         var anplizeImageData = function(img, w, h){
             var temp = img.data;
-            var x = that.__config.trans_v;
             for(var i = 0; i < h; i++){
                 var len = that.__imageData.length;
                 var line_data = [];
-                //if ( i%5 > 2){
-                //    continue;
-                //}
+                if ( (i%111)%2 == 1){
+                    continue;
+                }
                 for(var j = 0; j < w; j++) {
                     var index = i*4*w + j*4;
-                    //if ( j%5 > 2){
-                    //    continue;
-                    //}
+                    if ( (j%111)%2 == 1){
+                        continue;
+                    }
                     var llen = line_data.length;
                     line_data[llen] = {
-                         'x':llen,
-                         'y':len,
-                         'c':{
+                         'x'    :llen,
+                         'y'    :len,
+                         'select':true,
+                         'show' :true,
+                         'color':{
                              r: temp[index],
                              g: temp[index+1],
                              b: temp[index+2],
